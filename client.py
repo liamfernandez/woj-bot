@@ -24,7 +24,7 @@ tree = app_commands.CommandTree(client)
     description="Have Woj break the news to the rest of the league of a trade that you've made.",
     options=[
         app_commands.Option(
-            name="team1",
+            name="team 1",
             description="The first team involved in the trade",
             type=str,
             choices=[
@@ -33,7 +33,13 @@ tree = app_commands.CommandTree(client)
             ],
         ),
         app_commands.Option(
-            name="team2", description="The second team involved in the trade", type=str
+            name="team 2",
+            description="The second team involved in the trade",
+            type=str,
+            choices=[
+                {"name": "Liam", "value": "ChillTown BC (Liam)"},
+                {"name": "Lok", "value": "<Lok's team name here> (Lok)"},
+            ],
         ),
         app_commands.Option(
             name="team1Receives",
