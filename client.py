@@ -17,7 +17,7 @@ TRADE_LOG_CHANNEL_ID = (
     1143707162607099924  # right now is set to bot-trade-log channel as to avoid spam
 )
 
-# Initiate Intents object. Needed for client or bot instantiation
+# Initiate Intents object. Needed for client instantiation
 intents = discord.Intents.all()
 client = discord.Client(intents=intents)
 tree = app_commands.CommandTree(client)
@@ -47,6 +47,8 @@ async def woj_bomb(
     interaction: discord.Interaction,
     team1: app_commands.Choice[str],
     team2: app_commands.Choice[str],
+    team1_receives: str,
+    team2_receives: str,
 ):
     if team1 is team2:
         await interaction.response.send_message(
@@ -56,7 +58,6 @@ async def woj_bomb(
 
     # Call image gen API with teamnames as params
     parameterizedUrl = f"{og_URL}?team1={team1.name}&team2={team2.name}"
-    print(parameterizedUrl)
     response = requests.get(url=parameterizedUrl)
     if response.status_code != 200:
         await interaction.response.send_message(
@@ -83,33 +84,3 @@ async def on_ready():
 
 
 client.run(TOKEN)
-
-
-# app_commands.Argument(
-#             name="team 1",
-#             description="The first team involved in the trade",
-#             type=str,
-#             choices=[
-#                 {"name": "Liam", "value": "ChillTown BC"},
-#                 {"name": "Lok", "value": "<Lok's team name here>"},
-#             ],
-#         ),
-#         app_commands.Option(
-#             name="team 2",
-#             description="The second team involved in the trade",
-#             type=str,
-#             choices=[
-#                 {"name": "Liam", "value": "ChillTown BC (Liam)"},
-#                 {"name": "Lok", "value": "<Lok's team name here> (Lok)"},
-#             ],
-#         ),
-#         app_commands.Option(
-#             name="team1Receives",
-#             description="What team 1 receives from the trade",
-#             type=str,
-#         ),
-#         app_commands.Option(
-#             name="team2Receives",
-#             description="What team 2 receives from the trade",
-#             type=str,
-#         ),
