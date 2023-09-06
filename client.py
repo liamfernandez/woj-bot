@@ -7,9 +7,7 @@ from dotenv import load_dotenv
 from io import BytesIO
 
 # CONSTANTS
-# og_URL = "https://og-woj-bomb.vercel.app/api/woj-bomb"
-og_URL = "http://localhost:3000/api/woj-bomb"
-# og_URL = "https://og-woj-bomb-lpod5xzoy-liamfernandez.vercel.app/api/woj-bomb"
+og_URL = "https://og-woj-bomb.vercel.app/api/woj-bomb"
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
@@ -60,12 +58,15 @@ async def woj_bomb(
     # Call image gen API with teamnames as params
     parameterizedUrl = f"{og_URL}?team1={team1.name}&team2={team2.name}&team1_receives={team1_receives}&team2_receives={team2_receives}"
     response = requests.get(url=parameterizedUrl)
+
+    # Case: api errors out
     if response.status_code != 200:
         await interaction.response.send_message(
             "My Twitter is down mate, one moment.",
             ephemeral=True,
         )
         return
+    # Case: api success -> returns image
     else:
         image_data = BytesIO(response.content)
         image_file = discord.File(image_data, "woj_bomb.png")
