@@ -8,7 +8,8 @@ from io import BytesIO
 
 # CONSTANTS
 # og_URL = "https://og-woj-bomb.vercel.app/api/woj-bomb"
-og_URL = "https://og-woj-bomb-lpod5xzoy-liamfernandez.vercel.app/api/woj-bomb"
+og_URL = "http://localhost:3000/api/woj-bomb"
+# og_URL = "https://og-woj-bomb-lpod5xzoy-liamfernandez.vercel.app/api/woj-bomb"
 load_dotenv()
 TOKEN = os.getenv("DISCORD_TOKEN")
 
@@ -57,7 +58,7 @@ async def woj_bomb(
         return
 
     # Call image gen API with teamnames as params
-    parameterizedUrl = f"{og_URL}?team1={team1.name}&team2={team2.name}"
+    parameterizedUrl = f"{og_URL}?team1={team1.name}&team2={team2.name}&team1_receives={team1_receives}&team2_receives={team2_receives}"
     response = requests.get(url=parameterizedUrl)
     if response.status_code != 200:
         await interaction.response.send_message(
