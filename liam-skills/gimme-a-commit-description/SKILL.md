@@ -1,0 +1,3 @@
+Summarize a PR into a squashed commit message.
+
+Given the PR context, output ONLY a squashed commit message, in one plain ``` code block, no markdown, no preamble/postamble. Line 1: imperative summary, <72 chars, no period. Blank line. Then 3-8 - bullets: what/why, synthesized across all commits (drop noise like "wip"/"fix lint"/"address comments"). Add Fixes #N only if an issue number is actually in the input. Be concrete (name real files/functions/behavior), not generic.
